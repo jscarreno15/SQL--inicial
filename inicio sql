@@ -1,0 +1,59 @@
+-- Listar todos los id con nombre y apellido
+
+select employee_id,first_name,last_name from employees order by last_name desc, first_name asc;
+
+
+--	Donde el salario es mayor que 1000 y menor que 5000
+
+select employee_id,first_name,last_name,salary from employees where (salary>1000 and salary<5000);
+
+
+--	Todos los empleados con id departamento nulo
+
+select employee_id,first_name,last_name,department_id from employees where department_id is null;
+
+
+--	Listar todos los empleados  que empiecen los apellidos con letra A
+
+select last_name from employees where last_name like 'A%
+
+
+--	Sacar el salario máximo mínimo que se paga(monto)
+
+select max(salary) as SALARIO_MAXIMO from EMPLOYEES;
+
+
+--	El promedio de salario que se paga
+
+select AVG(salary) as  PROMEDIO_SUELDO from employees;
+
+
+--	Todos los empleados que fueron contratados el 21/05/2007 (jaier date)
+
+select employee_id from employees where hire_date=  '21/05/2007';
+
+--	Todos los empleados que fueron contratados en el año  2004.
+
+select  employee_id,first_name,last_name,hire_date  from employees where hire_date BETWEEN '01/01/2004' AND '12/12/2004'
+
+
+--	Listar primeros5   empleados ordenados por apellido.   (ORDENAR POR APELLIDO) sentencia top,limit limitar registros a mostrar
+
+select employee_id,first_name,last_name  from employees order by last_name asc FETCH FIRST 5 ROWS ONLY;
+
+
+--	Los empleados que mas plata ganan, de ese salario máximo, quiere les personas que tengan ese salario
+
+select employee_id,first_name,last_name,salary from employees where salary=(SELECT MAX(salary) FROM employees);
+
+--	Todas las personas que ganan mas que el promedio del salario abonado
+
+select employee_id,first_name,last_name,salary from employees where salary>(SELECT AVG(SALARY) FROM EMPLOYEES);
+
+--	Todos los empleados que no son manager (null)
+
+select employee_id,first_name,last_name from employees where manager_id is null;
+
+--	Todos los empleados con su nombre y apellido y el nombre con el manager que lo dirige
+
+select employees.first_name, employees.last_name, departments.department_name from employees inner join departments on employees.department_id = departments.department_id;
